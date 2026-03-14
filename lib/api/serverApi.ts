@@ -3,7 +3,7 @@ import { Note } from '../../types/note';
 import { User } from '../../types/user';
 import { cookies } from 'next/headers';
 
-const baseURL = process.env.NEXT_PUBLIC_API_URL + '/api';
+const baseURL = (process.env.NEXT_PUBLIC_API_URL || '') + '/api';
 
 export const serverApi = axios.create({
   baseURL,
