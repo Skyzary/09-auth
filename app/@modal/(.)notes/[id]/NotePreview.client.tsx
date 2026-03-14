@@ -1,11 +1,11 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import Modal from '../../../../../components/Modal/Modal';
+import Modal from '../../../../components/Modal/Modal';
 import { useQuery } from '@tanstack/react-query';
-import { fetchNoteById } from '../../../../../lib/api/clientApi';
+import { fetchNoteById } from '../../../../lib/api/clientApi';
 import { BarLoader } from 'react-spinners';
-import Error from '../../../../../components/Error/Error';
+import Error from '../../../../components/Error/Error';
 
 export default function NotePreviewClient({ id }: { id: string }) {
   const router = useRouter();
