@@ -1,0 +1,44 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #333;
+  color: white;
+}
+
+.logo {
+  text-decoration: none;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.logo:hover {
+  color: #ddd;
+}
+
+.navigation {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navigationItem {
+  display: flex;
+  align-items: center;
+}
+
+.navigationLink {
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.navigationLink:hover {
+  color: #ddd;
+  text-decoration: underline;
+}

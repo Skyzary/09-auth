@@ -1,0 +1,44 @@
+.app {
+  width: 90%;
+  max-width: 1280px;
+  margin: 0px auto;
+  padding: 2rem 1rem;
+  flex: 1;
+}
+
+.topContainer {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.addButton {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #2341ba;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.addButton:hover {
+  background-color: #1a3299;
+}
+
+@media (max-width: 768px) {
+  .topContainer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .addButton {
+    width: 100%;
+  }
+}
