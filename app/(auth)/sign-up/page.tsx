@@ -16,9 +16,10 @@ export default function SignUpPage() {
     const formData = new FormData(e.currentTarget);
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
+    const username = formData.get('username') as string;
 
     try {
-      const user = await register({ email, password });
+      const user = await register({ email, password, username });
       setUser(user);
       router.push('/profile');
     } catch (err: any) {
@@ -30,6 +31,11 @@ export default function SignUpPage() {
     <main className={css.mainContent}>
       <h1 className={css.formTitle}>Sign up</h1>
       <form className={css.form} onSubmit={handleSubmit}>
+        <div className={css.formGroup}>
+          <label htmlFor="username">Username</label>
+          <input id="username" type="text" name="username" className={css.input} required />
+        </div>
+
         <div className={css.formGroup}>
           <label htmlFor="email">Email</label>
           <input id="email" type="email" name="email" className={css.input} required />

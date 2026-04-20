@@ -64,7 +64,6 @@ export default function NotesFilterClient({ tag }: NotesFilterClientProps) {
 
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <NoteForm
-          onNoteSaved={() => setIsModalOpen(false)}
           onCancel={() => setIsModalOpen(false)}
         />
       </Modal>

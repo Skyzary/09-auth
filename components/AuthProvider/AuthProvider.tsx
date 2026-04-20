@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useAuthStore } from '../../lib/store/authStore';
-import { checkSession } from '../../lib/api/clientApi';
+import { checkSession, getMe } from '../../lib/api/clientApi';
 import { usePathname, useRouter } from 'next/navigation';
 
 export default function AuthProvider({ children }: { children: React.ReactNode }) {
@@ -14,8 +14,9 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
     const checkUserSession = async () => {
       setIsChecking(true);
       try {
-        const user = await checkSession();
-        if (user) {
+        const isAuth = await checkSession();
+        if (isAuth) {
+          const user = await getMe();
           setUser(user);
         } else {
           clearIsAuthenticated();

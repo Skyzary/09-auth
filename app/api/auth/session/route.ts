@@ -12,11 +12,7 @@ export async function GET() {
     const refreshToken = cookieStore.get("refreshToken")?.value;
 
     if (accessToken) {
-      // Return user data from users/me if accessToken is already present
-      const apiRes = await api.get('users/me', {
-        headers: { Cookie: cookieStore.toString() },
-      });
-      return NextResponse.json(apiRes.data);
+      return NextResponse.json({ success: true });
     }
 
     if (refreshToken) {
@@ -39,16 +35,11 @@ export async function GET() {
           if (parsed.accessToken) cookieStore.set('accessToken', parsed.accessToken, options);
           if (parsed.refreshToken) cookieStore.set('refreshToken', parsed.refreshToken, options);
         }
+        return NextResponse.json({ success: true });
       }
-      return NextResponse.json(apiRes.data, { status: 200 });
     }
-    return NextResponse.json(null, { status: 200 });
+    return NextResponse.json({ success: false });
   } catch (error) {
-    if (isAxiosError(error)) {
-      logErrorResponse(error.response?.data);
-      return NextResponse.json(null, { status: 200 });
-    }
-    logErrorResponse({ message: (error as Error).message });
-    return NextResponse.json(null, { status: 200 });
+    return NextResponse.json({ success: false });
   }
 }

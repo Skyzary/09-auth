@@ -3,19 +3,19 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createNote } from '../../lib/api/clientApi';
 import { useNoteStore } from '../../lib/store/noteStore';
 import { Tag } from '../../types/note';
+import { useRouter } from 'next/navigation';
 
 interface NoteFormProps {
-  onNoteSaved: () => void;
   onCancel: () => void;
   onClose?: () => void;
 }
 
 export default function NoteForm({
-  onNoteSaved,
   onCancel,
   onClose,
 }: NoteFormProps) {
   const queryClient = useQueryClient();
+  const router = useRouter();
   const { draft, setDraft, clearDraft } = useNoteStore();
 
   const createMutation = useMutation({
@@ -23,15 +23,19 @@ export default function NoteForm({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notes'] });
       clearDraft();
-      onNoteSaved();
+      router.push('/notes/filter/all');
     },
   });
 
   const handleAction = (formData: FormData) => {
+    const title = formData.get('title') as string;
+    const content = formData.get('content') as string;
+    const tag = formData.get('tag') as Tag;
+
     createMutation.mutate({
-      title: draft.title,
-      content: draft.content,
-      tag: draft.tag,
+      title,
+      content,
+      tag,
     });
   };
 

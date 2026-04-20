@@ -1,6 +1,6 @@
 import { api } from './api';
 import { Note, NoteCreationPayload } from '../../types/note';
-import { User } from '../../types/user';
+import { AuthCredentials, RegisterCredentials, User } from '../../types/user';
 
 interface FetchNotesResponse {
   notes: Note[];
@@ -38,12 +38,12 @@ export const deleteNote = async (id: string): Promise<Note> => {
   return data;
 };
 
-export const register = async (credentials: any): Promise<User> => {
+export const register = async (credentials: RegisterCredentials): Promise<User> => {
   const { data } = await api.post('/auth/register', credentials);
   return data;
 };
 
-export const login = async (credentials: any): Promise<User> => {
+export const login = async (credentials: AuthCredentials): Promise<User> => {
   const { data } = await api.post('/auth/login', credentials);
   return data;
 };
@@ -52,13 +52,12 @@ export const logout = async (): Promise<void> => {
   await api.post('/auth/logout');
 };
 
-export const checkSession = async (): Promise<User | null> => {
+export const checkSession = async (): Promise<boolean> => {
   try {
     const { data } = await api.get('/auth/session');
-    if (!data || Object.keys(data).length === 0) return null;
-    return data;
+    return !!data?.success;
   } catch (err) {
-    return null;
+    return false;
   }
 };
 
