@@ -51,7 +51,7 @@ export async function proxy(request: NextRequest) {
   }
 
   if (isAuthPage && token) {
-    const redirectRes = NextResponse.redirect(new URL('/profile', request.url));
+    const redirectRes = NextResponse.redirect(new URL('/', request.url));
     response.cookies.getAll().forEach((c) => redirectRes.cookies.set(c.name, c.value, c));
     return redirectRes;
   }
